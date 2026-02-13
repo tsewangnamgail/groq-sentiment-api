@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        GROQ_API_KEY = credentials('groq-api-key')
-    }
-
     stages {
 
         stage('Build Docker Image') {
@@ -22,7 +18,7 @@ pipeline {
 
         stage('Run New Container') {
             steps {
-                sh 'docker run -d -p 8000:8000 -e GROQ_API_KEY=$GROQ_API_KEY --name sentiment-api sentiment-api'
+                sh 'docker run -d -p 8000:8000 --name sentiment-api sentiment-api'
             }
         }
     }
